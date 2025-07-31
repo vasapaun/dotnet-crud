@@ -1,0 +1,40 @@
+# Build results
+bin/
+obj/
+*.user
+*.suo
+
+# Rider & VS Code
+.idea/
+.vscode/
+
+# Avalonia generated assets (if any)
+.goutputstream-*
+
+# Avalonia compiled XAML cache (if any)
+*.g.cs
+*.g.i.cs
+
+# dotnet
+*.dbmdl
+*.pdb
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+.nuget/
+packages/
+project.lock.json
+project.assets.json
+
+# User secrets
+secrets.json
+
+# Logs
+*.log
+
+# Visual Studio specific
+*.vs/

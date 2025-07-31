@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PasswordManager.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        x:Class="PasswordManager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PasswordManager"
+        Width="400"
+        Height="600"
+        CanResize="True"
+        WindowState="Normal">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel VerticalAlignment="Top" Margin="20">
+        <TextBlock Margin="5 5">Username</TextBlock>
+        <TextBox Text = "{Binding Username, Mode=TwoWay}" Watermark="Enter your username" Margin="5" Name="UsernameTextbox" />
+        
+        <TextBlock Margin="5 5">Password</TextBlock>
+        <TextBox Text = "{Binding Password, Mode=TwoWay}" Watermark="Enter your password" PasswordChar="*" Margin="5" Name="PasswordTextbox" />
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="5" Command="{Binding CreateCommand}">Create User</Button>
+            <Button Grid.Column="2" Margin="5" Command="{Binding UpdateCommand}">Update User</Button>
+            <Button Grid.Column="4" Margin="5" Command="{Binding DeleteCommand}">Delete User</Button>
+        </Grid>
+        
+        <TextBlock Margin="5 20 5 5" Text="Current users" FontSize="16" HorizontalAlignment="Center"/>
+        <DataGrid ItemsSource="{Binding UserList}"
+                  AutoGenerateColumns="False" GridLinesVisibility="All"
+                  IsReadOnly="True" Margin="5 5 5 5"
+                  BorderBrush="AntiqueWhite" BorderThickness="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*"/>
+                <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <TextBlock Name="Message" Text="{Binding StatusMessage}" Margin="5" Foreground="{Binding StatusMessageColor}"/>
+        
+    </StackPanel>
+
+</Window>
